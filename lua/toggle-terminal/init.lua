@@ -26,7 +26,7 @@ local function get_win_obj_buf()
     return win_obj_buf
 end
 
-local function toggle_terminal()
+function M.toggle_terminal()
     local win_obj_buf = get_win_obj_buf()
     if (next(M.file2term) == nil) then
         open_terminal()
@@ -76,7 +76,7 @@ local function toggle_terminal()
 end
 
 -- Check if the terminal and files are in the current tab
-local function change_to_file_dir()
+function M.change_to_file_dir()
     local win_obj_buf = get_win_obj_buf()
     for file, term in pairs(M.file2term) do
         if (win_obj_buf[file] and win_obj_buf[term]) then
@@ -85,17 +85,5 @@ local function change_to_file_dir()
         end
     end
 end
-
-vim.api.nvim_create_user_command(
-    'MyToggleTerm',
-    toggle_terminal,
-    {}
-)
-
-vim.api.nvim_create_user_command(
-    'MyTermCd',
-    change_to_file_dir,
-    {}
-)
 
 return M
